@@ -1,0 +1,13 @@
+using './main.bicep'
+
+param resourceGroupName = 'demo1r'
+param resourceGroupLocation = 'eastus'
+param storageName = 'demo1stgblob'
+param storageLocation = 'eastus'
+param vnetName = 'demo1vnet'
+param location = 'eastus'
+param vnetAddressPrefix = '10.0.0.0/21'
+param subnet1Name = 'demo1subnet'
+param subnet1Prefix = '10.0.0.0/26'
+param subnet2Name = 'demo2subnet'
+param subnet2Prefix = '10.0.0.0/26'

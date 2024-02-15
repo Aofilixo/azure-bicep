@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "resourceGroupName": {
+      "value": "demo1rg"
+    },
+    "resourceGroupLocation": {
+      "value": "eastus"
+    },
+    "storageName": {
+      "value": "demo1stgblb"
+    },
+    "storageLocation": {
+      "value": "eastus"
+    },
+    "vnetName": {
+      "value": "demo1vnet"
+    },
+    "location": {
+      "value": "eastus"
+    },
+    "vnetAddressPrefix": {
+      "value": "10.0.0.0/21"
+    },
+    "subnet1Name": {
+      "value": "demo1subnet"
+    },
+    "subnet1Prefix": {
+      "value": "10.0.0.0/26"
+    },
+    "subnet2Name": {
+      "value": "demo2subnet"
+    },
+    "subnet2Prefix": {
+      "value": "10.0.0.0/26"
+    }
+  }
+}
