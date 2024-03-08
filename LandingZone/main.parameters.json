@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "resourceGroupName": {
+      "value": "LZ-RG"
+    },
+    "resourceGroupLocation": {
+      "value": "eastus"
+    },
+    "storageName": {
+      "value": "lzstg01"
+    },
+    "storageLocation": {
+      "value": "eastus"
+    },
+    "vnetName": {
+      "value": "lz-vnet"
+    },
+    "location": {
+      "value": "eastus"
+    },
+    "storageSkuName": {
+      "value": "Standard_LRS"
+    },
+    "pipAddressName": {
+      "value": "pip-basic-test"
+    },
+    "pipLocation": {
+      "value": "eastus"
+    }
+  }
+}
