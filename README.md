@@ -1,6 +1,6 @@
-# Azure Bicep Project
+# Azure Bicep
 
-A brief description of what your Azure Bicep project does. Include an overview of the Azure resources it deploys or manages.
+Bicep modules developed for something.... who knows? Use Opentofu
 
 ## Overview
 
