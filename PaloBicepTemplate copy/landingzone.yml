@@ -1,0 +1,61 @@
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+parameters:
+  - name: overrideLocation
+    displayName: Override Location
+    type: string
+    default: eastus
+  - name: resourceGroupName
+    displayName: Resource Group Name
+    type: string
+    default: rg
+  - name: storageName
+    displayName: Storage Account Name
+    type: string
+    default: sg
+  - name: vnetName
+    displayName: Virtual Network Name
+    type: string
+    default: vnet
+  - name: deploymentName
+    displayName: Deployment Name
+    type: string
+    default: deploy
+
+jobs:
+  - job: DeployResources
+    displayName: Deploy Azure Resources
+    steps:
+      - checkout: self
+      - bash: |
+          echo "Generating a random string for resource naming..."
+          RANDOM_STR=$(head /dev/urandom | tr -dc a-z0-9 | head -c 5)
+          echo "##vso[task.setvariable variable=randomString]$RANDOM_STR"
+        displayName: Generate Random String
+        name: generateRandomString
+      - task: AzureCLI@2
+        inputs:
+          azureSubscription: 'testsboxconnect'
+          scriptType: 'bash'
+          scriptLocation: 'inlineScript'
+          inlineScript: |
+            RESOURCE_GROUP_NAME="sbox${{ parameters.resourceGroupName }}$(randomString)"
+            STORAGE_NAME="sbox${{ parameters.storageName }}$(randomString)"
+            VNET_NAME="sbox${{ parameters.vnetName }}$(randomString)"
+            DEPLOYMENT_NAME="${{ parameters.deploymentName }}$(randomString)"
+            
+            echo "Deploying with the following names:"
+            echo "Resource Group: $RESOURCE_GROUP_NAME"
+            echo "Storage Account: $STORAGE_NAME"
+            echo "Virtual Network: $VNET_NAME"
+            echo "Deployment Name: $DEPLOYMENT_NAME"
+            
+            az deployment sub create --name $DEPLOYMENT_NAME --location ${{ parameters.overrideLocation }} \
+              --template-file $(Build.SourcesDirectory)/PaloDeploy/main.bicep \
+              --parameters $(Build.SourcesDirectory)/PaloDeploy/main.parameters.json \
+              --parameters resourceGroupName=$RESOURCE_GROUP_NAME storageName=$STORAGE_NAME vnetName=$VNET_NAME
+        displayName: Deploy with Azure CLI
